@@ -1,0 +1,54 @@
+https://www.freecodecamp.org/news/how-to-add-two-numbers-using-machine-learning/
+
+
+Import libraries
+Import the numpy and keras libraries with these commands:
+
+import numpy as np
+from keras.models import Sequential
+from keras.layers import Dense
+
+Import required libraries
+Prepare the data
+The accuracy of your machine learning models depends on the data with which you train your model.
+
+To create the addition data we'll need here, let's create pairs of 1000 random numbers which will be considered our input. The output will be the sum of the numbers in each pair.
+
+num_samples = 1000
+X_train = np.random.rand(num_samples, 2)
+y_train = X_train[:, 0] + X_train[:, 1]
+Generate input dataset
+
+Define the neural network
+Let's build a neural network with two input layers – one hidden layer with 8 neurons, and an output layer with a single neuron. We'll use the "relu" activation function.
+
+model = Sequential()
+model.add(Dense(8, input_shape=(2,), activation='relu'))
+model.add(Dense(1))
+Define a sequential model with 2 Input Layers
+Compile the model
+Compile the model using the MSE (Mean Squared Error) as the loss function and Adam optimizer.
+
+model.compile(loss='mse', optimizer='adam')
+Compile the model using the MSE 
+Train the model
+Train the model for 100 epochs, with a batch size of 32.
+
+batch_size = 32
+epochs = 100
+model.fit(X_train, y_train, batch_size=batch_size, epochs=epochs, verbose=1)
+Train the model for 100 epochs
+This may take few seconds depending on your CPU configuration. It consumed around 10 to 15 seconds in my laptop to complete.
+
+Test the model
+Now that we have trained our model, let's test it with a few custom inputs. I have taken two inputs but you can test your model with any number of inputs.
+
+test_input = np.array([[1, 2], [0.3, 0.4]])
+predicted_sum = model.predict(test_input)
+Predict output with custom input
+Print the values
+The prediction is complete. Let's see if they're right by printing the predicted values:
+
+print("Predicted sums:")
+print(predicted_sum)
+Print predicted sums
